@@ -40,7 +40,7 @@ def login():
 
     #Checks to see if the password is at least 8 characters
     if len(password) <= 7:
-        return 'Invalid password. Must be at least 8 characters long.'
+        return 'Invalid password. Must be at least 8 characters long. Link to return to login page: <a href=\"/login\">Login</a>'
 
     #Checks that the password only includes valid letters and numbers
     letters = False
@@ -54,7 +54,13 @@ def login():
     #Checks if the password contains both letters and numbers; then displays what the user entered
     if letters and numbers:
         hashed_password = bcrypt.generate_password_hash(password.encode("utf8"))
-        return f'Username: {username}, Hashed password: {hashed_password}. Link to return to login page: <a href=\"/login\">Login</a>'
+        return render_template_string('''
+        <h2>Login Credentials</h2>
+        <p>Username: {{ u }}</p>
+        <p>Password: {{ p }}</p>
+        <p>Hashed password: {{ hp }}</p>
+        <a href=\"/login\">Login Page</a>
+        ''', u=username, p=password, hp=hashed_password)
     else:
         return 'Invalid Password. Must contain letters and numbers. Link to return to login page: <a href=\"/login\">Login</a>'
 
