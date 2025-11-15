@@ -36,7 +36,7 @@ def login():
     #Checks that no special characters are in the username
     for i in username:
         if i not in string.ascii_letters and i not in string.digits:
-            return 'Invalid Username. Cannot include special characters or spaces.'
+            return 'Invalid Username. Cannot include special characters or spaces. Link to return to login page: <a href=\"/login\">Login</a>'
 
     #Checks to see if the password is at least 8 characters
     if len(password) <= 7:
